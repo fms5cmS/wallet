@@ -2,7 +2,7 @@ package types
 
 import "math/big"
 
-type GetTransactionReq struct {
+type TransactionDataReq struct {
 	// base parameters
 	Sender   string
 	Receiver string
@@ -13,7 +13,7 @@ type GetTransactionReq struct {
 	Fee *EstimateFee
 }
 
-type GetTransactionResp struct {
+type TransactionDataResp struct {
 	TransactionData []byte
 	DataForSign     []byte
 }
@@ -29,16 +29,16 @@ type EstimateFee struct {
 	BaseOrStaticFee   *big.Int // base fee or static fee price
 }
 
-type GetTransactionOption func(*GetTransactionReq)
+type TransactionDataOption func(*TransactionDataReq)
 
-func WithContractData(info *ContractTransaction) GetTransactionOption {
-	return func(req *GetTransactionReq) {
+func WithContractData(info *ContractTransaction) TransactionDataOption {
+	return func(req *TransactionDataReq) {
 		req.ContractTxn = info
 	}
 }
 
-func WithFeeData(fee *EstimateFee) GetTransactionOption {
-	return func(req *GetTransactionReq) {
+func WithFeeData(fee *EstimateFee) TransactionDataOption {
+	return func(req *TransactionDataReq) {
 		req.Fee = fee
 	}
 }

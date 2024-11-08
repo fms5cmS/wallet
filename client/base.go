@@ -10,8 +10,10 @@ type BaseClient interface {
 	NativeToken() *types.Token
 	// NativeTokenBalance get native token balance
 	NativeTokenBalance(ctx context.Context, req *types.GetTokenBalanceReq) *types.TokenBalance
-	// GetTransactionData get transaction data before sign and send
-	GetTransactionData(ctx context.Context, req *types.GetTransactionReq, options ...types.GetTransactionOption) (*types.GetTransactionResp, error)
+	// TransactionData get transaction data before sign and send
+	TransactionData(ctx context.Context, req *types.TransactionDataReq, options ...types.TransactionDataOption) (*types.TransactionDataResp, error)
 	// SendTransaction send transaction
-	SendTransaction(ctx context.Context, req *types.SendTransactionReq, options ...types.GetTransactionOption) (*types.SendTransactionResp, error)
+	SendTransaction(ctx context.Context, req *types.SendTransactionReq, options ...types.TransactionDataOption) (*types.SendTransactionResp, error)
+	// TransactionByHas get transaction by hash
+	TransactionByHas(ctx context.Context, hash string)
 }
